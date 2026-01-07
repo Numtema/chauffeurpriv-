@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chauffeur Privé - Normandie & Paris</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --bg: #0B0B0F;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: #F5F5F7;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        .glass-dark {
+          background: rgba(18, 18, 26, 0.85);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Animation: Infinite Marquee */
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: flex;
+          width: fit-content;
+          animation: marquee 30s linear infinite;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+
+        /* Animation: Text Shine */
+        .text-shine {
+          background: linear-gradient(to right, #B7B7C2 20%, #FFF 40%, #FFF 60%, #B7B7C2 80%);
+          background-size: 200% auto;
+          color: #000;
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: shine 5s linear infinite;
+        }
+        @keyframes shine {
+          to { background-position: 200% center; }
+        }
+
+        /* Gold Gradient Border */
+        .gold-border-gradient {
+          border: 1px solid transparent;
+          background: linear-gradient(var(--bg), var(--bg)) padding-box,
+                      linear-gradient(135deg, var(--gold), transparent, var(--gold)) border-box;
+        }
+
+        /* Handle reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          .animate-marquee, .text-shine {
+            animation: none !important;
+          }
+        }
+
+        input:focus, select:focus, textarea:focus {
+          border-color: var(--gold) !important;
+          box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2) !important;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #242433; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "framer-motion": "https://esm.sh/framer-motion@^12.24.7"
+  }
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
