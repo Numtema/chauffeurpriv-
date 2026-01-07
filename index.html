@@ -14,10 +14,9 @@
         }
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg);
-            color: #F5F5F7;
             scroll-behavior: smooth;
             overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
         .glass-dark {
           background: rgba(18, 18, 26, 0.85);
@@ -26,6 +25,21 @@
           border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
+        .light-mode .glass-dark {
+          background: rgba(255, 255, 255, 0.7);
+          border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hero Grid Style with Fade Effect */
+        .hero-grid {
+          background-size: 40px 40px;
+          background-image: 
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px);
+          mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+          -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+        }
+
         /* Animation: Infinite Marquee */
         @keyframes marquee {
           0% { transform: translateX(0); }
@@ -40,52 +54,21 @@
           animation-play-state: paused;
         }
 
-        /* Animation: Text Shine */
-        .text-shine {
-          background: linear-gradient(to right, #B7B7C2 20%, #FFF 40%, #FFF 60%, #B7B7C2 80%);
-          background-size: 200% auto;
-          color: #000;
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: shine 5s linear infinite;
-        }
-        @keyframes shine {
-          to { background-position: 200% center; }
-        }
-
-        /* Gold Gradient Border */
-        .gold-border-gradient {
-          border: 1px solid transparent;
-          background: linear-gradient(var(--bg), var(--bg)) padding-box,
-                      linear-gradient(135deg, var(--gold), transparent, var(--gold)) border-box;
-        }
-
-        /* Handle reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-          .animate-marquee, .text-shine {
-            animation: none !important;
-          }
-        }
-
-        input:focus, select:focus, textarea:focus {
-          border-color: var(--gold) !important;
-          box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2) !important;
-        }
-
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #242433; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
     </style>
 <script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "framer-motion": "https://esm.sh/framer-motion@^12.24.7"
+    "react": "https://esm.sh/react@18.3.1",
+    "react/": "https://esm.sh/react@18.3.1/",
+    "react-dom": "https://esm.sh/react-dom@18.3.1",
+    "react-dom/": "https://esm.sh/react-dom@18.3.1/",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.475.0?deps=react@18.3.1",
+    "framer-motion": "https://esm.sh/framer-motion@11.11.17?deps=react@18.3.1"
   }
 }
 </script>

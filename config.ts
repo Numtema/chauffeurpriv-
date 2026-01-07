@@ -20,26 +20,36 @@ export const CONFIG = {
 
   // --- Design & Thème ---
   theme: {
-    colors: {
-      bg: "#0B0B0F",          // Fond principal
-      surface: "#12121A",     // Fond des cartes et sections
-      border: "#242433",      // Bordures
-      gold: "#D4AF37",        // Couleur accent Or
-      goldHover: "#E1C45A",   // Or au survol
-      text: "#F5F5F7",        // Texte clair
-      muted: "#B7B7C2",       // Texte secondaire
-      success: "#22C55E",     // Vert succès
-      danger: "#EF4444",      // Rouge erreur
-      support: {
-        bg: "#F9F9F9",
-        text: "#111111",
-        accent: "#D4AF37",    // Adapté à l'Or du site
+    modes: {
+      dark: {
+        bg: "#0B0B0F",
+        surface: "#12121A",
+        surface2: "#07070D",
+        border: "rgba(255, 255, 255, 0.05)",
+        text: "#F5F5F7",
+        muted: "#B7B7C2",
+        gridOpacity: 0.1,
+      },
+      light: {
+        bg: "#FFFFFF",
+        surface: "#F8FAFC", // Light gray/blue
+        surface2: "#0F172A", // Bleu Nuit for contrast sections
+        border: "rgba(15, 23, 42, 0.1)", // Navy based border
+        text: "#0F172A", // Bleu Nuit text
+        muted: "#475569", // Gray slate
+        gridOpacity: 0.08,
       }
+    },
+    colors: {
+      gold: "#D4AF37",
+      goldHover: "#E1C45A",
+      success: "#22C55E",
+      danger: "#EF4444",
     },
     spacing: {
       sectionPadding: "py-24 md:py-40",
       containerMax: "1120px",
-      borderRadius: "3rem", // Arrondi global des cartes/boutons
+      borderRadius: "3rem",
     },
     animations: {
       duration: 0.6,
@@ -75,8 +85,8 @@ export const CONFIG = {
   // --- Tarification ---
   pricing: {
     minPrice: 10,
-    baseRate: 2.0, // €/km pour local
-    nightWeekendPremium: 1.15, // +15%
+    baseRate: 2.0,
+    nightWeekendPremium: 1.15,
     forfaits: [
       { match: "cdg", name: "CDG Roissy", price: 220 },
       { match: "ory", name: "Orly", price: 210 },
