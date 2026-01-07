@@ -31,15 +31,15 @@ import { CONFIG } from './config';
 
 // --- Animations primitives ---
 const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
 };
 
 const staggerContainer = {
   initial: {},
-  whileInView: { transition: { staggerChildren: 0.05 } },
+  whileInView: { transition: { staggerChildren: 0.1 } },
   viewport: { once: true }
 };
 
@@ -159,7 +159,7 @@ const Navbar = () => {
 };
 
 const SectionHeader = ({ title, subtitle, highlight }: { title: string; subtitle?: string; highlight?: string }) => (
-  <div className="text-center mb-12 md:mb-20 max-w-4xl mx-auto px-4">
+  <div className="text-center mb-16 md:mb-24 max-w-4xl mx-auto px-4">
     <motion.div
       {...fadeInUp}
       className="inline-block px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-[8px] md:text-[9px] font-black uppercase tracking-[0.4em] mb-4 border border-[#D4AF37]/20"
@@ -224,17 +224,6 @@ export default function App() {
     setEstimate({ price: Math.round(price), rule });
   };
 
-  const ServiceIcon = ({ iconId, size = 32 }: { iconId: string; size?: number }) => {
-    switch (iconId) {
-      case 'car': return <Car size={size} />;
-      case 'plane': return <Plane size={size} />;
-      case 'ship': return <Ship size={size} />;
-      case 'map': return <MapIcon size={size} />;
-      case 'clock': return <Clock size={size} />;
-      default: return <Compass size={size} />;
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#0B0B0F] selection:bg-[#D4AF37] selection:text-black overflow-x-hidden">
       <motion.div className="fixed top-0 left-0 right-0 h-1 bg-[#D4AF37] z-[60] origin-left" style={{ scaleX }} />
@@ -286,23 +275,6 @@ export default function App() {
                 NOS SERVICES
               </a>
             </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="mt-12 md:mt-16 flex items-center justify-center lg:justify-start gap-8 md:gap-12"
-            >
-              <div className="text-center lg:text-left">
-                <div className="text-2xl md:text-3xl font-black text-white">24/7</div>
-                <div className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-[#B7B7C2]">Disponibilité</div>
-              </div>
-              <div className="w-[1px] h-8 md:h-10 bg-white/10" />
-              <div className="text-center lg:text-left">
-                <div className="text-2xl md:text-3xl font-black text-white">4.9/5</div>
-                <div className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-[#B7B7C2]">Avis Clients</div>
-              </div>
-            </motion.div>
           </div>
 
           <motion.div 
@@ -319,80 +291,121 @@ export default function App() {
              </div>
           </motion.div>
         </div>
-
-        <motion.div 
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30"
-        >
-          <span className="text-[7px] font-black uppercase tracking-[0.5em] text-white">Scroll</span>
-          <ChevronDown size={12} />
-        </motion.div>
       </section>
 
       <InfiniteMarquee />
 
-      {/* 3. PROMESSE CLAIRE */}
-      <section className="py-16 md:py-24 px-4 md:px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-          {[
-            { icon: <ShieldCheck size={24} className="text-[#D4AF37]" />, text: "Protection Totale", sub: "Discrétion absolue" },
-            { icon: <Zap size={24} className="text-[#D4AF37]" />, text: "Ultra Ponctuel", sub: "Aucune attente" },
-            { icon: <Star size={24} className="text-[#D4AF37]" />, text: "Prestige Garanti", sub: "Flotte premium" },
-            { icon: <Clock size={24} className="text-[#D4AF37]" />, text: "Support 24h/24", sub: "À votre écoute" }
-          ].map((item, i) => (
-            <motion.div 
-              key={i} 
-              {...fadeInUp}
-              transition={{ delay: i * 0.05 }}
-              className="flex flex-col gap-4 md:gap-6 p-6 md:p-10 glass-dark rounded-[2rem] md:rounded-[2.5rem] border border-[#242433] group hover:border-[#D4AF37]/30 transition-all relative overflow-hidden"
-            >
-              <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-[#D4AF37]/5 flex items-center justify-center border border-[#D4AF37]/10 group-hover:bg-[#D4AF37] group-hover:text-black transition-all">
-                {item.icon}
-              </div>
-              <div>
-                <h4 className="font-black text-white text-lg md:text-xl tracking-tight mb-1">{item.text}</h4>
-                <p className="text-[#B7B7C2] text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] opacity-40">{item.sub}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* 4. SERVICES */}
-      <section id="services" className="py-16 md:py-32 px-4 md:px-6 bg-[#07070D] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto relative z-10">
+      {/* 2. SERVICES SECTION (IMAGES) */}
+      <section id="services" className="py-24 md:py-32 px-4 md:px-6 bg-[#07070D]">
+        <div className="max-w-7xl mx-auto">
           <SectionHeader 
-            title="L'Art du Transport" 
-            subtitle="Chaque trajet est une expérience unique, calibrée selon vos exigences de confort et de temps." 
+            title="L'Art du Voyage" 
+            subtitle="Explorez nos solutions de transport sur-mesure, alliant luxe et efficacité opérationnelle." 
             highlight="Prestations"
           />
           
-          <motion.div 
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="whileInView"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6"
-          >
-            {CONFIG.services.map((service) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {CONFIG.services.map((service, i) => (
               <motion.div 
                 key={service.id}
-                variants={fadeInUp}
-                className="p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] bg-[#12121A] border border-[#242433] flex flex-col items-center text-center group hover:bg-white/[0.03] transition-all"
+                {...fadeInUp}
+                transition={{ delay: i * 0.1 }}
+                className="group relative h-[400px] md:h-[500px] rounded-[3rem] overflow-hidden border border-white/5 bg-[#12121A] cursor-pointer"
               >
-                <div className="w-20 h-20 md:w-24 md:h-24 rounded-[1.5rem] md:rounded-[2rem] bg-[#0B0B0F] border border-[#242433] flex items-center justify-center mb-6 md:mb-10 text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-500">
-                  <ServiceIcon iconId={service.iconId} size={30} />
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0">
+                   <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-40 group-hover:opacity-60"
+                   />
+                   <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0F] via-[#0B0B0F]/40 to-transparent" />
                 </div>
-                <h3 className="text-lg md:text-xl font-black text-white mb-3 md:mb-4 tracking-tighter">{service.title}</h3>
-                <p className="text-xs md:text-sm text-[#B7B7C2] font-medium leading-relaxed opacity-60">{service.desc}</p>
+                
+                {/* Content */}
+                <div className="relative z-10 h-full p-10 flex flex-col justify-end items-start text-left">
+                   <div className="w-12 h-12 rounded-2xl bg-[#D4AF37]/10 flex items-center justify-center border border-[#D4AF37]/20 mb-6 group-hover:bg-[#D4AF37] group-hover:text-black transition-all">
+                      {service.id === 'local' && <Car size={24} />}
+                      {service.id === 'airport' && <Plane size={24} />}
+                      {service.id === 'port' && <Ship size={24} />}
+                      {service.id === 'long' && <MapIcon size={24} />}
+                      {service.id === 'pro' && <Clock size={24} />}
+                   </div>
+                   <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tighter">{service.title}</h3>
+                   <p className="text-sm text-[#B7B7C2] font-medium leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity">
+                      {service.desc}
+                   </p>
+                   
+                   {/* Hover Border Glow */}
+                   <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#D4AF37]/30 rounded-[3rem] transition-all duration-700 pointer-events-none" />
+                </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* 5. TARIFS */}
-      <section id="tarifs" className="py-16 md:py-32 px-4 md:px-6">
+      {/* 3. CTA SECTION (TARA STYLE) */}
+      <section className="py-24 md:py-32 px-4 md:px-6 relative overflow-hidden">
+         <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=2000" 
+              className="w-full h-full object-cover opacity-20 grayscale"
+              alt="Night Paris"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0F] via-[#0B0B0F]/80 to-[#D4AF37]/10" />
+         </div>
+         
+         <div className="max-w-6xl mx-auto relative z-10 text-center lg:text-left">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+               <div>
+                  <motion.div {...fadeInUp} className="text-[#D4AF37] text-[10px] font-black uppercase tracking-[0.4em] mb-6">Prêt pour le départ ?</motion.div>
+                  <motion.h2 {...fadeInUp} transition={{delay:0.1}} className="text-5xl md:text-7xl font-black text-white mb-10 tracking-tighter leading-tight">
+                    RÉSERVEZ VOTRE <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-white">EXPÉRIENCE</span>
+                  </motion.h2>
+                  <motion.p {...fadeInUp} transition={{delay:0.2}} className="text-lg text-[#B7B7C2] font-medium mb-12 max-w-lg opacity-70">
+                    Gagnez du temps et voyagez avec élégance. Nos chauffeurs vous attendent pour une prise en charge immédiate ou planifiée.
+                  </motion.p>
+                  
+                  <motion.div {...fadeInUp} transition={{delay:0.3}} className="flex flex-col sm:flex-row gap-5">
+                     <a href="#réserver" className="px-10 py-5 bg-[#D4AF37] text-black rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-[#D4AF37]/30">
+                        RÉSERVER MAINTENANT <ArrowRight size={20} />
+                     </a>
+                     <a href={`tel:${CONFIG.phone}`} className="px-10 py-5 border border-white/20 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:border-[#D4AF37] transition-all">
+                        <Phone size={20} /> NOUS APPELER
+                     </a>
+                  </motion.div>
+               </div>
+               
+               <motion.div 
+                 initial={{ opacity: 0, scale: 0.9 }}
+                 whileInView={{ opacity: 1, scale: 1 }}
+                 className="hidden lg:flex justify-center"
+               >
+                  <div className="p-12 glass-dark rounded-[4rem] border border-[#D4AF37]/20 relative">
+                     <div className="absolute -top-6 -right-6 w-20 h-20 bg-[#D4AF37] rounded-full flex items-center justify-center text-black font-black text-xl shadow-2xl animate-bounce">
+                        VIP
+                     </div>
+                     <ul className="space-y-6">
+                        {[
+                          "Confirmation par SMS",
+                          "Attente gratuite 15 min",
+                          "Boissons & Wi-Fi à bord",
+                          "Paiement CB sécurisé"
+                        ].map((txt, i) => (
+                          <li key={i} className="flex items-center gap-4 text-white font-black text-lg">
+                            <CheckCircle2 className="text-[#D4AF37]" size={24} /> {txt}
+                          </li>
+                        ))}
+                     </ul>
+                  </div>
+               </motion.div>
+            </div>
+         </div>
+      </section>
+
+      {/* 4. TARIFS SECTION */}
+      <section id="tarifs" className="py-24 md:py-32 px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           <SectionHeader title="Tarifs Clairs" subtitle="Pas de frais cachés. Le prix annoncé est le prix payé." highlight="Transparence" />
           
@@ -428,8 +441,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* 6. RÉSERVATION */}
-      <section id="réserver" className="py-16 md:py-32 px-4 md:px-6 bg-[#07070D]">
+      {/* 5. RÉSERVATION SECTION */}
+      <section id="réserver" className="py-24 md:py-32 px-4 md:px-6 bg-[#07070D]">
         <div className="max-w-6xl mx-auto">
           <SectionHeader title="Préparez Votre Départ" subtitle="Sécurisez votre chauffeur en quelques clics. Confirmation instantanée." highlight="Réservation" />
           
@@ -474,31 +487,34 @@ export default function App() {
                   </div>
                </div>
 
-               <button onClick={calculateEstimate} className="w-full py-5 md:py-6 bg-white text-black rounded-2xl md:rounded-3xl font-black text-base md:text-xl hover:bg-[#D4AF37] transition-all flex items-center justify-center gap-3">
-                 CALCULER <ArrowRight size={20} />
+               <button onClick={calculateEstimate} className="w-full py-5 md:py-6 bg-white text-black rounded-2xl md:rounded-3xl font-black text-base md:text-xl hover:bg-[#D4AF37] transition-all flex items-center justify-center gap-3 group">
+                 OBTENIR MON PRIX <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                </button>
             </motion.div>
 
             <div className="lg:col-span-5 flex flex-col gap-6 md:gap-8">
               <AnimatePresence mode="wait">
                 {estimate ? (
-                  <motion.div key="est" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-[#12121A] p-8 md:p-12 rounded-[2.5rem] md:rounded-[4rem] border border-[#D4AF37]/30 flex-1">
+                  <motion.div key="est" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-[#12121A] p-8 md:p-12 rounded-[2.5rem] md:rounded-[4rem] border border-[#D4AF37]/30 flex-1 relative overflow-hidden">
+                     <div className="absolute top-0 right-0 p-8 opacity-10"><Zap size={64} className="text-[#D4AF37]" /></div>
                      <div className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.3em] text-[#D4AF37] mb-4">Prix Estimé</div>
                      <div className="text-5xl md:text-7xl font-black text-white mb-3 md:mb-4 tracking-tighter">{estimate.price}<span className="text-xl md:text-2xl ml-1 text-[#D4AF37]">€</span></div>
                      <p className="text-xs md:text-sm font-medium text-[#B7B7C2] opacity-60 mb-8 md:mb-12 leading-relaxed">{estimate.rule}</p>
                      
                      <div className="space-y-3">
-                        <button className="w-full py-4 md:py-5 bg-[#D4AF37] text-black rounded-xl md:rounded-2xl font-black text-sm md:text-lg flex items-center justify-center gap-2">
+                        <button className="w-full py-4 md:py-5 bg-[#D4AF37] text-black rounded-xl md:rounded-2xl font-black text-sm md:text-lg flex items-center justify-center gap-2 shadow-lg shadow-[#D4AF37]/20">
                           <CreditCard size={18} /> Payer par Carte
                         </button>
-                        <button onClick={() => window.open(`https://wa.me/${CONFIG.whatsapp}`, '_blank')} className="w-full py-4 md:py-5 border border-[#242433] text-white rounded-xl md:rounded-2xl font-black text-sm md:text-lg flex items-center justify-center gap-2">
+                        <button onClick={() => window.open(`https://wa.me/${CONFIG.whatsapp}`, '_blank')} className="w-full py-4 md:py-5 border border-[#242433] text-white rounded-xl md:rounded-2xl font-black text-sm md:text-lg flex items-center justify-center gap-2 hover:bg-white/5 transition-all">
                           <MessageCircle size={18} className="text-[#25D366]" /> WhatsApp
                         </button>
                      </div>
                   </motion.div>
                 ) : (
-                  <div className="h-full bg-white/[0.02] border border-white/5 rounded-[2.5rem] md:rounded-[4rem] border-dashed flex flex-col items-center justify-center text-center p-8 md:p-12 min-h-[250px]">
-                     <Zap size={32} className="opacity-10 mb-6" />
+                  <div className="h-full bg-white/[0.02] border border-white/5 rounded-[2.5rem] md:rounded-[4rem] border-dashed flex flex-col items-center justify-center text-center p-8 md:p-12 min-h-[300px]">
+                     <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-6">
+                        <Zap size={32} className="opacity-10" />
+                     </div>
                      <p className="text-xs md:text-sm text-[#B7B7C2] font-medium leading-relaxed opacity-50">Saisissez vos informations pour débloquer votre tarif instantané.</p>
                   </div>
                 )}
@@ -508,33 +524,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 7. ENTREPRISES */}
-      <section id="entreprises" className="py-16 md:py-32 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-[#12121A] p-10 md:p-24 rounded-[3rem] md:rounded-[5rem] border border-white/5 relative overflow-hidden group">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-center relative z-10">
-              <div>
-                <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-6 md:mb-10 tracking-tighter leading-tight">Partenariat <br /><span className="text-[#D4AF37]">Exécutif</span></h2>
-                <p className="text-base md:text-xl text-[#B7B7C2] font-medium leading-relaxed mb-8 md:mb-16 opacity-70">Libérez vos collaborateurs des contraintes logistiques. Une facturation unique, une priorité absolue.</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
-                  {["Facturation Mensuelle", "Ligne Dédiée 24/7", "Berlines Exclusives", "Suivi Pro"].map(t => (
-                    <div key={t} className="flex items-center gap-3 text-white font-black tracking-tight text-sm">
-                       <CheckCircle2 className="text-[#D4AF37]" size={16} /> {t}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="glass-dark p-8 md:p-16 rounded-[2.5rem] md:rounded-[4rem] border border-white/10 text-center">
-                 <Briefcase size={40} className="text-[#D4AF37] mx-auto mb-6 md:mb-10" />
-                 <h4 className="text-xl md:text-3xl font-black text-white mb-4 md:mb-6 tracking-tighter">Compte Pro</h4>
-                 <a href={`mailto:${CONFIG.email}`} className="block w-full py-4 md:py-6 bg-white text-black rounded-xl md:rounded-2xl font-black text-sm md:text-lg">DEMANDER UN DEVIS</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. FOOTER */}
+      {/* 6. FOOTER */}
       <footer className="py-16 md:py-32 px-4 md:px-6 bg-[#0B0B0F] border-t border-white/5 relative">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 md:gap-20">
           <div className="text-center md:text-left">
@@ -549,9 +539,9 @@ export default function App() {
           </div>
         </div>
         
-        <div className="max-w-7xl mx-auto mt-16 md:mt-32 pt-8 md:pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 opacity-30">
-           <p className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-center">© 2025 Chauffeur Privé Normandie.</p>
-           <div className="flex gap-6 md:gap-12 text-[8px] font-bold uppercase tracking-widest">
+        <div className="max-w-7xl mx-auto mt-16 md:mt-32 pt-8 md:pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 opacity-30 text-[8px] md:text-[10px] font-bold uppercase tracking-widest">
+           <p>© 2025 Chauffeur Privé Normandie.</p>
+           <div className="flex gap-6 md:gap-12">
               <a href="#" className="hover:text-white">Mentions</a>
               <a href="#" className="hover:text-white">CGV</a>
               <a href="#" className="hover:text-white">Cookies</a>

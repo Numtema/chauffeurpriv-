@@ -15,11 +15,36 @@ export const CONFIG = {
     ]
   },
   services: [
-    { id: 'local', title: 'Déplacements locaux', desc: 'Normandie, trajets quotidiens, rendez-vous.', iconId: 'car' },
-    { id: 'airport', title: 'Gares & Aéroports', desc: 'CDG, Orly, Beauvais, Gares SNCF.', iconId: 'plane' },
-    { id: 'port', title: 'Port & Croisières', desc: 'Prise en charge au port du Havre ou Rouen.', iconId: 'ship' },
-    { id: 'long', title: 'Longue distance', desc: 'Trajets directs Paris & grandes villes.', iconId: 'map' },
-    { id: 'pro', title: 'Mise à disposition', desc: 'Chauffeur à l’heure ou à la journée.', iconId: 'clock' }
+    { 
+      id: 'local', 
+      title: 'Déplacements locaux', 
+      desc: 'Normandie, trajets quotidiens, rendez-vous.', 
+      image: 'https://images.unsplash.com/photo-1517672688305-69111956799d?auto=format&fit=crop&q=80&w=800'
+    },
+    { 
+      id: 'airport', 
+      title: 'Gares & Aéroports', 
+      desc: 'CDG, Orly, Beauvais, Gares SNCF.', 
+      image: 'https://images.unsplash.com/photo-1436491865332-7a61a109c0f2?auto=format&fit=crop&q=80&w=800'
+    },
+    { 
+      id: 'port', 
+      title: 'Port & Croisières', 
+      desc: 'Prise en charge au port du Havre ou Rouen.', 
+      image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=800'
+    },
+    { 
+      id: 'long', 
+      title: 'Longue distance', 
+      desc: 'Trajets directs Paris & grandes villes.', 
+      image: 'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&q=80&w=800'
+    },
+    { 
+      id: 'pro', 
+      title: 'Mise à disposition', 
+      desc: 'Chauffeur à l’heure ou à la journée.', 
+      image: 'https://images.unsplash.com/photo-1511527844068-006b95d162c2?auto=format&fit=crop&q=80&w=800'
+    }
   ]
 };
 
